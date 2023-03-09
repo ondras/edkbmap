@@ -1,3 +1,11 @@
+@import url("keyboard.css");
+
+@layer modifiers {
+	[hidden] {
+		display: none !important;
+	}
+}
+
 * {
 	box-sizing: border-box;
 }
@@ -6,8 +14,11 @@ body {
 	font-family: sans-serif;
 }
 
-details {
+details, label {
 	--color: hsl(var(--hue) 100% 40%);
+}
+
+details {
 	border: 2px solid var(--color);
 	border-radius: 16px;
 	padding: 6px;
@@ -17,6 +28,14 @@ summary {
 	color: var(--color);
 	font-weight: bold;
 	cursor: pointer;
+}
+
+label {
+	color: var(--color);
+}
+
+label input {
+	accent-color: var(--color);
 }
 
 table { border-collapse: collapse; }
