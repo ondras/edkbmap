@@ -31,6 +31,7 @@ summary {
 }
 
 label {
+	cursor: pointer;
 	color: var(--color);
 }
 
@@ -39,20 +40,30 @@ label input {
 }
 
 table { border-collapse: collapse; }
-td:first-child { padding-right: 4px; }
-td:last-child { padding-left: 4px; }
+td { padding: 1px 2px; }
+td:first-child { padding-right: 8px; }
+td:last-child { text-align: center; }
 tr:nth-child(even) { background-color: #eee; }
 tr:hover { background-color: #ddd; }
 
+hr {
+	clear: both;
+}
+
+#logo {
+	float: right;
+	margin-left: 32px;
+}
+
 #groups {
 	display: flex;
-	flex-direction: column;
+	flex-wrap: wrap;
 	align-items: flex-start;
 	gap: 4px;
 }
 
 #groups details {
-	min-width: 30%;
+	flex: 1 0 40%;
 }
 
 #log {
@@ -60,3 +71,10 @@ tr:hover { background-color: #ddd; }
 }
 
 #log pre { margin: 0; }
+
+#keyboard form {
+	margin-top: 8px;
+	display: flex;
+	flex-wrap: wrap;
+	gap: 10px;
+}

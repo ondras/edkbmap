@@ -4,8 +4,8 @@ export default {
 		hue: "0deg"
 	},
 	srv: {
-		label: "SRV",
-		hue: "240deg"
+		label: "SRV controls",
+		hue: "300deg"
 	},
 	ui: {
 		label: "UI",
@@ -21,6 +21,6 @@ export default {
 	},
 	camera: {
 		label: "Camera",
-		hue: "300deg"
+		hue: "240deg"
 	}
 }

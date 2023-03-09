@@ -14,7 +14,8 @@ const KEYS = {
 	"UpArrow": "↑",
 	"DownArrow": "↓",
 	"LeftBracket": "[",
-	"RightBracket": "]"
+	"RightBracket": "]",
+	"Apostrophe": "'"
 }
 
 function splitWords(str) { return str.replace(/([a-z])([A-Z0-9])/g, "$1 $2"); }
@@ -49,8 +50,14 @@ export function formatGroup(partitioned, type) {
 	let table = document.createElement("table");
 	for (let c in commands) {
 		let row = table.insertRow();
-		row.insertCell().textContent = prettifyCommand(c);
-		row.insertCell().textContent = commands[c].map(prettifyKey).join(" or ");
+
+		let cell1 = row.insertCell();
+		cell1.textContent = prettifyCommand(c);
+		cell1.title = c;
+
+		let cell2 = row.insertCell();
+		cell2.textContent = commands[c].map(prettifyKey).join(" or ");
+		cell2.title = commands[c].join(", ");
 	}
 
 	node.append(summary, table);

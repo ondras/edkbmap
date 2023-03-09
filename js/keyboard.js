@@ -16,11 +16,13 @@ function createBackground(hues) {
 	let colors = hues.map(hueToColor);
 	let stops = [];
 	colors.forEach((color, i, all) => {
-		stops.push(`${color} ${}`);
-		stops.push(`${color} ${}`);
+		let stop1 = i/all.length;
+		let stop2 = (i+1)/all.length;
+		stops.push(`${color} ${100*stop1}%`);
+		stops.push(`${color} ${100*stop2}%`);
 	});
 
-	return `linear-gradient(45deg, ${stops.join(",")})`;
+	return `conic-gradient(${stops.join(",")})`;
 }
 
 function applyColorsToKey(key, types) {
