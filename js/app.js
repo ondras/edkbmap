@@ -1,4 +1,3 @@
-import sample from "./sample.js";
 import { parse, partition } from "./parser.js"
 import { formatGroup } from "./format.js"
 import { clear } from "./log.js";
@@ -38,7 +37,6 @@ async function onFile(e) {
 function init() {
 	keyboard.hide();
 	document.querySelector("[type=file]").addEventListener("change", onFile);
-	go(sample);
 }
 
 init();
