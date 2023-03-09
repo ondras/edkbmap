@@ -16,24 +16,14 @@ details {
 summary {
 	color: var(--color);
 	font-weight: bold;
-	margin: 0.3em 0;
 	cursor: pointer;
 }
 
-table {
-	border-collapse: collapse;
-}
-
+table { border-collapse: collapse; }
 td:first-child { padding-right: 4px; }
 td:last-child { padding-left: 4px; }
-
-tr:nth-child(even) {
-	background-color: #eee;
-}
-
-tr:hover {
-	background-color: #ddd;
-}
+tr:nth-child(even) { background-color: #eee; }
+tr:hover { background-color: #ddd; }
 
 #groups {
 	display: flex;
@@ -49,3 +39,5 @@ tr:hover {
 #log {
 	--color: #000;
 }
+
+#log pre { margin: 0; }
