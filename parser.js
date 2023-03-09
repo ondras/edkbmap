@@ -26,7 +26,6 @@ function parseCommand(command) {
 export function parse(str) {
 	log("parsing", str.length, "bytes")
 	let doc = new DOMParser().parseFromString(str, "text/xml");
-	log(doc);
 
 	if (doc.documentElement.nodeName == "parsererror") {
 		log("parsing error", doc.documentElement.textContent);
