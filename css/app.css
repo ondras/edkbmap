@@ -78,3 +78,5 @@ hr {
 	flex-wrap: wrap;
 	gap: 10px;
 }
+
+[hidden] + hr, :empty + hr { display: none; }
