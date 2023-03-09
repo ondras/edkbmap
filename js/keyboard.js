@@ -12,7 +12,11 @@ function getKeyValue(key) {
 }
 
 function createBackground(hues) {
+	function hueToColor(hue) { return `hsl(${hue} 100% 80%)`}
+	let colors = hues.map(hueToColor);
+	if (colors.length == 1) { colors.unshift(colors[0]); }
 
+	return `linear-gradient(45deg, ${colors.join(",")})`;
 }
 
 function applyColorsToKey(key, types) {
