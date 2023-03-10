@@ -52,6 +52,11 @@ h1 span {
 
 hr { clear: both; }
 
+footer {
+	font-size: 80%;
+	text-align: center;
+}
+
 #logo {
 	float: right;
 	margin-left: 32px;
