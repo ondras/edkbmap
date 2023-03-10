@@ -46,9 +46,11 @@ td:last-child { text-align: center; }
 tr:nth-child(even) { background-color: #eee; }
 tr:hover { background-color: #ddd; }
 
-hr {
-	clear: both;
+h1 span {
+	font-size: 50%;
 }
+
+hr { clear: both; }
 
 #logo {
 	float: right;
