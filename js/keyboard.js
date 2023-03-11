@@ -4,8 +4,10 @@ import conf from "./conf.js";
 
 let node = document.querySelector("#keyboard");
 let keys = [...node.querySelectorAll("kbd")];
+let temporaryKeys = [];
 let form = node.querySelector("form");
 let data = {};
+
 
 function getKeyValue(key) {
 	return key.dataset.key || key.textContent;
@@ -48,7 +50,7 @@ function applyColorsToKey(key, types) {
 
 function applyColors() {
 	let types = [...form.querySelectorAll(":checked")].map(input => input.name);
-	keys.forEach(key => applyColorsToKey(key, types));
+	[...keys, ...temporaryKeys].forEach(key => applyColorsToKey(key, types));
 }
 
 function buildCheckbox(type) {
@@ -65,11 +67,23 @@ function buildCheckbox(type) {
 	return label;
 }
 
+function createTemporaryKey(key) {
+	let k = document.createElement("kbd");
+	k.append(key);
+	k.classList.add("temporary");
+	temporaryKeys.push(k);
+	return k;
+}
+
 export function hide() {
 	node.hidden = true;
 }
 
 export function validate(commands) {
+	while (temporaryKeys.length) { temporaryKeys.pop().remove(); }
+	let kb = node.querySelector(".keyboard");
+	kb.classList.remove("extended");
+
 	let values = new Set();
 	keys.forEach(key => values.add(getKeyValue(key)));
 
@@ -78,7 +92,11 @@ export function validate(commands) {
 			key.split("+").forEach(key => {
 				if (values.has(key)) { return; }
 				if (key.match(/mouse/i)) { return; }
+
 				log("keyboard does not know the key", key, "for command", entry[0]);
+				let k = createTemporaryKey(key);
+				kb.append(k);
+				kb.classList.add("extended");
 			});
 		});
 	});
