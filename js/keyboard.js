@@ -97,6 +97,7 @@ export function validate(commands) {
 				let k = createTemporaryKey(key);
 				kb.append(k);
 				kb.classList.add("extended");
+				values.add(key);
 			});
 		});
 	});
