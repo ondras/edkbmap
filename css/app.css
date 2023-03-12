@@ -1,4 +1,5 @@
 @import url("keyboard.css");
+@import url("popup.css");
 
 @layer modifiers {
 	[hidden] {

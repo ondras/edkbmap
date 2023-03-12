@@ -1,13 +1,55 @@
 import { log } from "./log.js";
 import conf from "./conf.js";
+import * as popup from "./popup.js";
+import { prettifyCommand } from "./format.js";
 
 
-let node = document.querySelector("#keyboard");
-let keys = [...node.querySelectorAll("kbd")];
+let parent = document.querySelector("#keyboard");
+let kb = parent.querySelector(".keyboard");
+let form = parent.querySelector("form");
+
+let keys = [...kb.querySelectorAll("kbd")];
 let temporaryKeys = [];
-let form = node.querySelector("form");
 let data = {};
 
+
+kb.addEventListener("mousemove", e => {
+	let trg = e.target;
+	if (popup.node.contains(trg)) { return; }
+
+	if (trg.localName != "kbd") {
+		popup.hide();
+		return;
+	}
+
+	fillPopup(trg);
+	popup.show(e);
+});
+
+kb.append(popup.node);
+
+
+function fillPopup(key) {
+	let value = getKeyValue(key);
+	let types = getActiveTypes();
+
+	let ul = document.createElement("ul");
+	types.forEach(type => {
+		Object.entries(data[type]).forEach(entry => {
+			entry[1].forEach(key => {
+				if (!key.split("+").includes(value)) { return; }
+				let li = document.createElement("li");
+				li.style.setProperty("--hue", conf[type].hue);
+				li.append(prettifyCommand(entry[0]));
+				ul.append(li);
+			});
+		});
+	});
+
+	popup.node.innerHTML = "";
+
+	if (ul.children.length > 0) { popup.node.append(ul); }
+}
 
 function getKeyValue(key) {
 	return key.dataset.key || key.textContent;
@@ -48,8 +90,12 @@ function applyColorsToKey(key, types) {
 	}
 }
 
+function getActiveTypes() {
+	return [...form.querySelectorAll(":checked")].map(input => input.name);
+}
+
 function applyColors() {
-	let types = [...form.querySelectorAll(":checked")].map(input => input.name);
+	let types = getActiveTypes();
 	[...keys, ...temporaryKeys].forEach(key => applyColorsToKey(key, types));
 }
 
@@ -76,12 +122,11 @@ function createTemporaryKey(key) {
 }
 
 export function hide() {
-	node.hidden = true;
+	parent.hidden = true;
 }
 
 export function validate(commands) {
 	while (temporaryKeys.length) { temporaryKeys.pop().remove(); }
-	let kb = node.querySelector(".keyboard");
 	kb.classList.remove("extended");
 
 	let values = new Set();
@@ -107,7 +152,7 @@ export function validate(commands) {
 export function show(partitioned, types) {
 	data = partitioned;
 
-	node.hidden = false;
+	parent.hidden = false;
 	form.innerHTML = "";
 
 	let inputs = types.map(buildCheckbox);

@@ -1,4 +1,6 @@
 .keyboard {
+	position: relative;
+
 	max-width: 1800px;
 	width: 100%;
 	aspect-ratio: 23 / 6;

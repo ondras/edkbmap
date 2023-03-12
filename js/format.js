@@ -25,7 +25,7 @@ function splitWords(str) { return str.replace(/([a-z])([A-Z0-9])/g, "$1 $2"); }
 
 function removeUnderscores(str) { return str.replace(/_/g, " "); }
 
-function prettifyCommand(command) {
+export function prettifyCommand(command) {
 	return splitWords(
 		removeUnderscores(
 			command.replace(REMOVE, "")
