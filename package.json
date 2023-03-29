@@ -1,0 +1,8 @@
+{
+  "devDependencies": {
+    "esbuild": "^0.17.14"
+  },
+  "scripts": {
+    "bundle": "esbuild --bundle js/app.js > app.bundle.js"
+  }
+}
